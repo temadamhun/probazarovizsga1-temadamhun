@@ -9,11 +9,11 @@ from selenium.webdriver.support import expected_conditions as EC
 PATH = "C:\\Users\\temad\\Desktop\\Driver\\chromedriver.exe"
 URL = "https://witty-hill-0acfceb03.azurestaticapps.net/timesheet.html"
 browser = webdriver.Chrome(PATH)
-browser.maximize_window()  # az oldal méretét maximalizálja.
+browser.maximize_window()
 browser.get(URL)
 
 next_btn = browser.find_element_by_xpath('//input[@type="button"][@value="Next"]')
-assert next_btn.get_attribute("disabled") == "true"
+assert next_btn.get_attribute("disabled") == "true" # nem aktív gomb, a gomb disabled attribum értéke true
 emai_input = browser.find_element_by_xpath('//input[@type="email"]')
 emai_input.send_keys("test.test")
 assert next_btn.get_attribute("disabled") == "true"
@@ -31,5 +31,5 @@ next_btn.click()
 
 WebDriverWait(browser, 5).until(EC.visibility_of_element_located((By.ID, "section-thankyou")))
 check = browser.find_elements_by_xpath('//span[@class="green ng-binding"]')
-assert check[1].text == "2"
+assert check[1].text == "2"  # tömb első eleme az email, a 2. eleme az óra
 assert check[2].text == "0"
